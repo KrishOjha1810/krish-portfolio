@@ -76,7 +76,7 @@ export default function About() {
                 />
 
                 {/* Subtitle Card Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-zinc-950/85 border border-zinc-850 px-3.5 py-2.5 rounded-xl backdrop-blur-md">
+                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center bg-zinc-950/85 border border-zinc-800 px-3.5 py-2.5 rounded-xl backdrop-blur-md">
                   <div className="flex flex-col">
                     <span className="text-white font-semibold text-xs tracking-wider uppercase">Krish Ojha</span>
                     <span className="text-mist/40 text-[9px] font-mono tracking-widest uppercase mt-0.5">Indore, India</span>

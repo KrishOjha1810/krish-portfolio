@@ -5,17 +5,11 @@ interface BootIntroProps {
 }
 
 const BOOT_LOGS = [
-  'SYSTEM BOOT PROTOCOL INITIATED...',
-  '[OK] ACQUIRING CORE IDENTITY: KRISH OJHA',
-  '[OK] DETECTING LOCALE: INDORE, INDIA',
-  '[OK] CONFIRMING DEGREE: B.TECH CS & DATA SCIENCE',
-  '[OK] PARSING WORK PROFILE: ANCILAR BACKEND DEV',
-  '[OK] SOLVING LEETCODE SUBROUTINES: 213 SUB-PROBLEMS COMPLETED',
-  '[OK] BOOTING SMART CONTRACT INTERFACES (SOLIDITY/FOUNDRY)',
-  '[OK] CONNECTING CROSS-CHAIN MONITOR: 20+ ACTIVE BRIDGES INDEXED',
-  '[OK] DEPLOYING RUST AXUM MICROSERVICES',
-  '[OK] ACTIVATING PROMPTGUARD LOCAL SEC-LAYER',
-  'SYSTEM READY. LAUNCHING PORTFOLIO...',
+  'booting krish_ojha portfolio…',
+  '[ok] full-stack & web3 engineer · indore',
+  '[ok] 20+ bridges · 95% contract coverage',
+  '[ok] solidity · rust · typescript · python',
+  'launching…',
 ]
 
 export default function BootIntro({ onComplete }: BootIntroProps) {
@@ -23,18 +17,21 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
   const [index, setIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
+  // Skip the intro entirely for reduced-motion users.
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) onComplete()
+  }, [onComplete])
+
   useEffect(() => {
     if (index < BOOT_LOGS.length) {
-      const delay = index === 0 ? 300 : index === BOOT_LOGS.length - 1 ? 500 : Math.random() * 150 + 50
+      const delay = index === 0 ? 150 : 130
       const timer = setTimeout(() => {
         setLogs((prev) => [...prev, BOOT_LOGS[index]])
         setIndex(index + 1)
       }, delay)
       return () => clearTimeout(timer)
     } else {
-      const endTimer = setTimeout(() => {
-        onComplete()
-      }, 600)
+      const endTimer = setTimeout(onComplete, 350)
       return () => clearTimeout(endTimer)
     }
   }, [index, onComplete])
@@ -46,19 +43,18 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
     }
   }, [logs])
 
-  // Keypress listener for Escape key to skip
+  // Skip on ANY key press
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onComplete()
-      }
-    }
+    const handleKeyDown = () => onComplete()
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onComplete])
 
   return (
-    <div className="fixed inset-0 bg-ink z-[9999] flex flex-col justify-between font-mono p-6 sm:p-10 select-none text-emerald-400">
+    <div
+      onClick={onComplete}
+      className="fixed inset-0 bg-ink z-[9999] flex flex-col justify-between font-mono p-6 sm:p-10 select-none text-emerald-400 cursor-pointer"
+    >
       <div 
         ref={containerRef}
         className="flex-1 overflow-y-auto max-w-3xl mx-auto w-full flex flex-col justify-start gap-2 pt-10 scrollbar-none"
@@ -70,7 +66,7 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
         
         {logs.map((log, i) => {
           const isError = log.includes('[FAIL]')
-          const isSystem = log.startsWith('SYSTEM')
+          const isSystem = log.startsWith('booting') || log.startsWith('launching')
           const colorClass = isError 
             ? 'text-red-500' 
             : isSystem 
@@ -94,11 +90,11 @@ export default function BootIntro({ onComplete }: BootIntroProps) {
 
       <div className="w-full max-w-3xl mx-auto flex justify-between items-center text-xs text-emerald-600/50 mt-4 border-t border-emerald-950/40 pt-4">
         <span>© 2026 Krish Ojha</span>
-        <button 
+        <button
           onClick={onComplete}
           className="hover:text-emerald-400 transition-colors duration-200 uppercase tracking-widest border border-emerald-950/60 px-3 py-1 rounded hover:bg-emerald-950/20 active:scale-95"
         >
-          Skip Intro [Esc]
+          Skip · click anywhere
         </button>
       </div>
     </div>

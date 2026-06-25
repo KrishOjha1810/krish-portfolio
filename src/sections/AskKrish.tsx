@@ -178,7 +178,7 @@ export default function AskKrish() {
           </div>
 
           {/* Interactive Chat Console (cols 7) */}
-          <div className="lg:col-span-7 flex flex-col h-[480px] rounded-2xl bg-[#0e0e0e] border border-zinc-805 shadow-2xl relative overflow-hidden">
+          <div className="lg:col-span-7 flex flex-col h-[480px] rounded-2xl bg-[#0e0e0e] border border-zinc-800 shadow-2xl relative overflow-hidden">
             {/* Console Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-900 bg-[#121212]">
               <div className="flex items-center gap-3">
@@ -207,7 +207,7 @@ export default function AskKrish() {
                     <div 
                       className={`max-w-[85%] rounded-xl px-4 py-3 text-xs sm:text-sm leading-relaxed border ${
                         isBot 
-                          ? 'bg-zinc-900/40 border-zinc-850 text-mist' 
+                          ? 'bg-zinc-900/40 border-zinc-800 text-mist' 
                           : 'bg-[#7621B0]/20 border-violet-800/40 text-violet-200'
                       }`}
                     >
@@ -223,7 +223,7 @@ export default function AskKrish() {
               {/* Bot typing simulation */}
               {isTyping && typingText && (
                 <div className="flex justify-start">
-                  <div className="max-w-[85%] rounded-xl px-4 py-3 text-xs sm:text-sm leading-relaxed border bg-zinc-900/40 border-zinc-850 text-mist">
+                  <div className="max-w-[85%] rounded-xl px-4 py-3 text-xs sm:text-sm leading-relaxed border bg-zinc-900/40 border-zinc-800 text-mist">
                     <div className="text-[9px] uppercase tracking-wider opacity-40 mb-1">
                       krish_agent
                     </div>
@@ -238,7 +238,7 @@ export default function AskKrish() {
               {/* Loader placeholder when delay is active */}
               {isTyping && !typingText && (
                 <div className="flex justify-start">
-                  <div className="bg-zinc-900/40 border border-zinc-850 rounded-xl px-4 py-3 text-xs sm:text-sm text-mist/60">
+                  <div className="bg-zinc-900/40 border border-zinc-800 rounded-xl px-4 py-3 text-xs sm:text-sm text-mist/60">
                     <div className="flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                       <span className="w-1.5 h-1.5 bg-violet-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />

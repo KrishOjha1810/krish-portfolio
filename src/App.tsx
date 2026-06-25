@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import SmoothScroll from './components/SmoothScroll'
 import ScrollProgress from './components/ScrollProgress'
+import Navbar from './components/Navbar'
+import CommandPalette from './components/CommandPalette'
 import BootIntro from './components/BootIntro'
 import Hero from './sections/Hero'
 import Marquee from './sections/Marquee'
-import Stats from './components/Stats'
 import About from './sections/About'
 import Skills from './sections/Skills'
 import CodingStats from './sections/CodingStats'
@@ -39,16 +40,17 @@ export default function App() {
     <main className="bg-ink animate-fade-in" style={{ overflowX: 'clip' }}>
       <SmoothScroll />
       <ScrollProgress />
+      <Navbar />
+      <CommandPalette />
       <Hero />
       <Marquee />
-      <Stats />
       <About />
       <Skills />
-      <CodingStats />
       <Expertise />
       <Experience />
       <Projects />
       <ProjectsGrid />
+      <CodingStats />
       <AskKrish />
       <Beyond />
       <Footer />

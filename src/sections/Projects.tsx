@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Github } from 'lucide-react'
 import FadeIn from '../components/FadeIn'
@@ -61,6 +61,8 @@ function Card({
   targetScale: number
 }) {
   const scale = useTransform(progress, range, [1, targetScale])
+  const [imgError, setImgError] = useState(false)
+  const showImage = Boolean(project.image) && !imgError
 
   return (
     <div className="h-[85vh] flex items-start justify-center sticky top-24 md:top-32">
@@ -131,32 +133,42 @@ function Card({
 
           {/* Right: accent visual */}
           <PointerGlow
-            color="rgba(255,255,255,0.28)"
+            color="rgba(255,255,255,0.18)"
             size={300}
-            className="md:col-span-3 rounded-[28px] sm:rounded-[36px] md:rounded-[44px] min-h-[220px] sm:min-h-[280px] md:min-h-[360px]"
+            className="md:col-span-3 rounded-[28px] sm:rounded-[36px] md:rounded-[44px] min-h-[220px] sm:min-h-[280px] md:min-h-[360px] border border-mist/10"
             style={{ background: project.accent }}
           >
-            <div
-              className="absolute inset-0 opacity-30 mix-blend-overlay"
-              style={{
-                backgroundImage:
-                  'radial-gradient(circle at 80% 20%, rgba(255,255,255,0.5), transparent 45%), radial-gradient(circle at 15% 85%, rgba(0,0,0,0.5), transparent 50%)',
-              }}
-            />
-            {/* sweeping shimmer */}
-            <div
-              className="absolute inset-0 animate-shimmer opacity-40"
-              style={{
-                backgroundImage:
-                  'linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.25) 50%, transparent 65%)',
-                backgroundSize: '200% 100%',
-              }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-white/90 font-black uppercase tracking-tight leading-none text-center px-6 text-4xl sm:text-6xl md:text-7xl drop-shadow-lg">
-                {project.name}
-              </span>
-            </div>
+            {showImage ? (
+              <>
+                <img
+                  src={project.image}
+                  alt={`${project.name} preview`}
+                  loading="lazy"
+                  decoding="async"
+                  onError={() => setImgError(true)}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: 'linear-gradient(180deg, rgba(12,12,12,0) 55%, rgba(12,12,12,0.5) 100%)' }}
+                />
+              </>
+            ) : (
+              <>
+                <div
+                  className="absolute inset-0 opacity-30 mix-blend-overlay"
+                  style={{
+                    backgroundImage:
+                      'radial-gradient(circle at 80% 20%, rgba(255,255,255,0.5), transparent 45%), radial-gradient(circle at 15% 85%, rgba(0,0,0,0.5), transparent 50%)',
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-white/90 font-black uppercase tracking-tight leading-none text-center px-6 text-4xl sm:text-6xl md:text-7xl drop-shadow-lg">
+                    {project.name}
+                  </span>
+                </div>
+              </>
+            )}
           </PointerGlow>
         </div>
       </motion.div>

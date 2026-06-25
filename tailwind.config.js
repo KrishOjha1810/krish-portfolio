@@ -27,12 +27,22 @@ export default {
         'border-spin': {
           '100%': { transform: 'rotate(-360deg)' },
         },
+        'marquee-left': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
+        },
+        'marquee-right': {
+          from: { transform: 'translateX(-50%)' },
+          to: { transform: 'translateX(0)' },
+        },
       },
       animation: {
         aurora: 'aurora 60s linear infinite',
         spotlight: 'spotlight 2.4s ease 0.4s 1 forwards',
         shimmer: 'shimmer 3s linear infinite',
         'border-spin': 'border-spin 7s linear infinite',
+        'marquee-left': 'marquee-left 40s linear infinite',
+        'marquee-right': 'marquee-right 40s linear infinite',
       },
     },
   },

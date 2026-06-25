@@ -8,6 +8,8 @@ export const SITE = {
   title: 'Full-Stack & Web3 Engineer',
   // Hero one-liner (left of the contact button)
   heroBlurb: 'full-stack engineer building cross-chain infrastructure, smart contracts, and Rust backends',
+  // Hero value sentence (recruiter-facing, readable sentence case)
+  tagline: 'I build the cross-chain infrastructure, smart contracts, and Rust backends that keep multi-chain protocols fast and secure.',
   location: 'Indore, India',
 
   // ---- CONTACT --------------------------------------------------------------
@@ -17,6 +19,19 @@ export const SITE = {
   linkedin: 'https://www.linkedin.com/in/krish-ojha/',
   leetcode: 'https://leetcode.com/u/KrishOjha_1810/',
   leetcodeUser: 'KrishOjha_1810',
+
+  // ---- RÉSUMÉS (role-specific; shown in a dropdown) -------------------------
+  resumes: [
+    { label: 'Full-Stack', file: '/krish-ojha-fullstack.pdf' },
+    { label: 'Backend', file: '/krish-ojha-backend.pdf' },
+    { label: 'Blockchain', file: '/krish-ojha-blockchain.pdf' },
+  ],
+
+  // ---- AVAILABILITY (hero status pill) --------------------------------------
+  available: true,
+  availability: 'Open to new roles',
+  // Not location-locked: remote-first but open anywhere.
+  availabilityWhere: 'Remote · Anywhere',
 
   // ---- HERO PHOTO -----------------------------------------------------------
   // Drop your photo into /public (e.g. public/krish.jpg) and set the path here.
@@ -33,6 +48,13 @@ export const SITE = {
   // object-position for the framed photo (bias toward the face).
   photoFocus: '42% 22%',
 } as const
+
+// Proof metrics shown above the fold in the hero.
+export const HERO_METRICS = [
+  { value: '20+', label: 'Bridges in production' },
+  { value: '95%', label: 'Contract test coverage' },
+  { value: '200K+', label: 'On-chain rows indexed' },
+]
 
 // Scroll-reveal bio paragraph (About section)
 export const ABOUT_TEXT =
@@ -95,7 +117,8 @@ export type Project = {
   highlights: string[]
   liveUrl?: string
   repoUrl: string
-  accent: string // gradient used on the visual panel
+  accent: string // gradient used on the visual panel (fallback if no image)
+  image?: string // real screenshot / repo card
 }
 
 export const PROJECTS: Project[] = [
@@ -114,6 +137,7 @@ export const PROJECTS: Project[] = [
     liveUrl: 'https://jobhunt-8i1m.onrender.com',
     repoUrl: 'https://github.com/KrishOjha1810/jobhunt',
     accent: 'linear-gradient(135deg, #B600A8 0%, #7621B0 55%, #18011F 100%)',
+    image: '/proj-jobhunt.png',
   },
   {
     num: '02',
@@ -129,6 +153,7 @@ export const PROJECTS: Project[] = [
     ],
     repoUrl: 'https://github.com/KrishOjha1810/promptguard-mcp',
     accent: 'linear-gradient(135deg, #1E9E6A 0%, #0E5C7E 55%, #061726 100%)',
+    image: '/proj-promptguard.png',
   },
   {
     num: '03',
@@ -142,8 +167,9 @@ export const PROJECTS: Project[] = [
       'Crowdfunding protocol with goal tracking, refunds and deploy scripts',
       'On-chain games: Bingo (ERC-20 game token) and a Decentralized Treasure Hunt',
     ],
-    repoUrl: 'https://github.com/KrishOjha1810?tab=repositories',
+    repoUrl: 'https://github.com/KrishOjha1810/nft-marketplace-foundry',
     accent: 'linear-gradient(135deg, #BE4C00 0%, #7621B0 55%, #18011F 100%)',
+    image: '/proj-solidity.png',
   },
 ]
 

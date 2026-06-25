@@ -1,12 +1,12 @@
 import { useState, lazy, Suspense } from 'react'
-import Navbar from '../components/Navbar'
 import Magnet from '../components/Magnet'
 import FadeIn from '../components/FadeIn'
+import ResumeMenu from '../components/ResumeMenu'
 import { ContactButton } from '../components/Buttons'
 import { AuroraBackground } from '../components/ui/aurora-background'
 import { Spotlight } from '../components/ui/spotlight'
 import { useEnable3D } from '../hooks/useEnable3D'
-import { SITE } from '../config'
+import { SITE, HERO_METRICS } from '../config'
 
 const HeroNetwork = lazy(() => import('../components/three/HeroNetwork'))
 
@@ -34,12 +34,22 @@ export default function Hero() {
         fill="#BBCCD7"
       />
 
-      <Navbar />
-
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col md:grid md:grid-cols-12 md:items-center px-6 md:px-16 lg:px-24 gap-8 py-20 md:py-10 z-10">
-        {/* Left Column: Heading, Blurb and CTA (cols 1-7) */}
+        {/* Left Column: value prop */}
         <div className="flex flex-col justify-center md:col-span-7 text-left order-1">
+          {SITE.available && (
+            <FadeIn delay={0.05} y={16}>
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest text-emerald-300 mb-5 w-fit">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                {SITE.availability} · {SITE.availabilityWhere}
+              </span>
+            </FadeIn>
+          )}
+
           <FadeIn delay={0.15} y={30}>
             <h1 className="hero-heading font-black uppercase tracking-tight leading-[0.9] text-[12vw] sm:text-[10vw] md:text-[7vw] lg:text-[8vw]">
               Hi, I&apos;m <span className="block">{SITE.firstName}</span>
@@ -53,21 +63,43 @@ export default function Hero() {
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.35} y={20} className="mt-2 md:mt-6">
-            <p
-              className="text-mist font-light uppercase tracking-wide leading-snug max-w-[280px] sm:max-w-[340px] md:max-w-[420px]"
-              style={{ fontSize: 'clamp(0.85rem, 1.2vw, 1.35rem)' }}
-            >
-              {SITE.heroBlurb}
+          <FadeIn delay={0.32} y={20} className="mt-3 md:mt-5">
+            <p className="text-mist font-semibold uppercase tracking-wide text-base sm:text-lg md:text-xl lg:text-2xl">
+              {SITE.title}
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.45} y={20} className="mt-6 md:mt-8">
-            <ContactButton href="#contact" />
+          <FadeIn delay={0.4} y={20} className="mt-3">
+            <p
+              className="text-mist/80 font-light leading-relaxed max-w-[300px] sm:max-w-[440px] md:max-w-[480px]"
+              style={{ fontSize: 'clamp(0.95rem, 1.2vw, 1.2rem)' }}
+            >
+              {SITE.tagline}
+            </p>
+          </FadeIn>
+
+          {/* Proof metrics */}
+          <FadeIn delay={0.48} y={20} className="mt-7">
+            <div className="flex flex-wrap gap-x-8 gap-y-4">
+              {HERO_METRICS.map((m) => (
+                <div key={m.label} className="flex flex-col">
+                  <span className="hero-heading font-black leading-none text-2xl sm:text-3xl">{m.value}</span>
+                  <span className="text-mist/50 text-[10px] sm:text-xs uppercase tracking-wider mt-1.5 max-w-[120px]">
+                    {m.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+
+          {/* CTAs */}
+          <FadeIn delay={0.56} y={20} className="mt-8 flex flex-wrap items-center gap-4">
+            <ContactButton href="#projects">View Work</ContactButton>
+            <ResumeMenu variant="ghost" align="left" direction="up" />
           </FadeIn>
         </div>
 
-        {/* Right Column: Magnetic Portrait (cols 8-12) - Desktop only! */}
+        {/* Right Column: Magnetic Portrait - Desktop only */}
         <div className="hidden md:flex items-center justify-center md:col-span-5 order-2">
           <FadeIn
             delay={0.6}
